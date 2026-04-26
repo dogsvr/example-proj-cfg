@@ -1,0 +1,12 @@
+{
+  "name": "example-proj-cfg",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Designer-authored game config for example-proj, compiled by @dogsvr/cfg-luban-cli.",
+  "scripts": {
+    "build": "cfg-luban-cli build --luban-dll tools/Luban/Luban.dll --flatc tools/flatc --designer designer_cfg --output dist"
+  },
+  "devDependencies": {
+    "@dogsvr/cfg-luban-cli": "file:../cfg-luban/cfg-luban-cli"
+  }
+}

@@ -67,11 +67,11 @@ For a breakdown of the 5 pipeline stages (Luban → extract-keys → sort-json �
 
 ## Consume from `example-proj`
 
-The runtime (`@dogsvr/cfg-luban`) needs two things from `dist/`:
+The runtime (`@dogsvr/cfg-luban`) needs these pieces from `dist/`:
 
 - `dist/db/` — the LMDB directory (passed to `openCfgDb({ dbPath })`)
 - `dist/table_keys.json` — primary-key metadata (passed to `openCfgDb({ tableKeysPath })`)
-- `dist/ts/` — TypeScript accessors; each `TbXxx.getRootAsTbXxx` is handed to `registerCfgTable`
+- `dist/ts/cfg` — the flatc barrel re-exporting every `TbXxx` class; either pass the whole module via `cfgModule` (Style A, shown below) or import individual classes and register them manually (Style B, see [`@dogsvr/cfg-luban`](../cfg-luban/cfg-luban/README.md#usage))
 
 Wire paths through `worker_thread_config.json` so hosts can point server processes at different config builds without recompiling:
 
@@ -86,18 +86,19 @@ Wire paths through `worker_thread_config.json` so hosts can point server process
 ```ts
 // example-proj/src/.../worker_logic.ts
 import * as dogsvr from '@dogsvr/dogsvr/worker_thread';
-import { openCfgDb, registerCfgTable } from '@dogsvr/cfg-luban';
-// Accessor imports — adjust the relative path to match your server's file depth.
-import { TbItem } from '<relative-path>/example-proj-cfg/dist/ts/tb-item';
-import { TbRank } from '<relative-path>/example-proj-cfg/dist/ts/tb-rank';
+import { openCfgDb } from '@dogsvr/cfg-luban';
+// Barrel import — adjust the relative path to match your server's file depth.
+import * as cfgModule from '<relative-path>/example-proj-cfg/dist/ts/cfg';
 
 dogsvr.workerReady(async () => {
     dogsvr.loadWorkerThreadConfig();
     const cfg = dogsvr.getThreadConfig<{ cfgDbPath: string; tableKeysPath: string }>();
 
-    openCfgDb({ dbPath: cfg.cfgDbPath, tableKeysPath: cfg.tableKeysPath });
-    registerCfgTable('TbItem', TbItem.getRootAsTbItem);
-    registerCfgTable('TbRank', TbRank.getRootAsTbRank);
+    openCfgDb({
+        dbPath: cfg.cfgDbPath,
+        tableKeysPath: cfg.tableKeysPath,
+        cfgModule,
+    });
 });
 ```
 

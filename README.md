@@ -1,9 +1,11 @@
 # example-proj-cfg
 
-Designer-authored game config for `example-proj`. Excel sheets live under
+Designer-authored game config for [`example-proj`](../example-proj). Excel sheets live under
 [`designer_cfg/`](./designer_cfg/); running `npm run build` compiles them
 into an LMDB database under `dist/` via
 [`@dogsvr/cfg-luban-cli`](../cfg-luban/cfg-luban-cli/README.md).
+
+Companion repo for [`example-proj`](https://github.com/dogsvr/example-proj); part of the [dogsvr polyrepo](https://github.com/dogsvr/dogsvr).
 
 ## Layout
 
@@ -27,6 +29,8 @@ Both `tools/` and `dist/` are gitignored; `tools/` is a per-developer one-time s
 > **Platform note**: the `tools/` layout described here assumes **Linux x86-64**, and this is the only environment the project has been tested on. `Luban.dll` itself is cross-platform (managed by `dotnet`), but `flatc` is a native binary — macOS / Windows developers must substitute an appropriate `flatc` build from the [FlatBuffers releases](https://github.com/google/flatbuffers/releases) (`flatc.exe` on Windows, Mach-O binary on macOS). Other OS/arch combos may or may not work — file an issue if something breaks.
 
 System-level: `dotnet` runtime (for Luban.dll), `python3 + openpyxl` (for reading `__tables__.xlsx`). See also the [cfg-luban-cli prerequisites](../cfg-luban/cfg-luban-cli/README.md#prerequisites).
+
+**Node.js**: tested on **v16.15.1 on Linux (x86-64)**. Newer LTS versions (18 / 20 / 22) are expected to work but are not routinely exercised; older versions may not. File an issue if something breaks on your runtime.
 
 Repo-local:
 

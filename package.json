@@ -6,6 +6,9 @@
   "scripts": {
     "build": "cfg-luban-cli build --luban-dll tools/Luban/Luban.dll --flatc tools/flatc --designer designer_cfg --output dist"
   },
+  "dependencies": {
+    "flatbuffers": "^24.3.25"
+  },
   "devDependencies": {
     "@dogsvr/cfg-luban-cli": "file:../cfg-luban/cfg-luban-cli"
   }

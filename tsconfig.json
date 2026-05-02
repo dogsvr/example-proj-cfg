@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2020",
+        "moduleResolution": "node",
+        "rootDir": "./dist/ts",
+        "outDir": "./dist/lib",
+        "declaration": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "dist/ts/**/*.ts"
+    ]
+}

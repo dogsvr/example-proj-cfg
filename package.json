@@ -3,13 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "description": "Designer-authored game config for example-proj, compiled by @dogsvr/cfg-luban-cli.",
+  "main": "./dist/lib/cfg.js",
+  "types": "./dist/lib/cfg.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/cfg.d.ts",
+      "default": "./dist/lib/cfg.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "build": "cfg-luban-cli build --luban-dll tools/Luban/Luban.dll --flatc tools/flatc --designer designer_cfg --output dist"
+    "build": "cfg-luban-cli build --luban-dll tools/Luban/Luban.dll --flatc tools/flatc --designer designer_cfg --output dist && tsc"
   },
   "dependencies": {
     "flatbuffers": "^24.3.25"
   },
   "devDependencies": {
-    "@dogsvr/cfg-luban-cli": "file:../cfg-luban/cfg-luban-cli"
+    "@dogsvr/cfg-luban-cli": "file:../cfg-luban/cfg-luban-cli",
+    "typescript": "^5.6.3"
   }
 }

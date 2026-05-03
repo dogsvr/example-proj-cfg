@@ -30,7 +30,7 @@ Both `tools/` and `dist/` are gitignored; `tools/` is a per-developer one-time s
 
 System-level: `dotnet` runtime (for Luban.dll), `python3 + openpyxl` (for reading `__tables__.xlsx`). See also the [cfg-luban-cli prerequisites](../cfg-luban/cfg-luban-cli/README.md#prerequisites).
 
-**Node.js**: tested on **v16.15.1 on Linux (x86-64)**. Newer LTS versions (18 / 20 / 22) are expected to work but are not routinely exercised; older versions may not. File an issue if something breaks on your runtime.
+**Node.js**: tested on **v24.13.0 on Linux (x86-64)**; other maintained LTS lines are expected to work but are not routinely exercised. File an issue if something breaks on your runtime.
 
 Repo-local:
 
